@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIne dash</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+
+header {
+    background-color: #d9534f;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+header h4{
+    padding-right: 400px;
+    margin-top: 3px;
+}
+input {
+    padding: 10px;
+    width: 80%;
+    margin: 10px auto;
+    display: block;
+}
+
+#restaurant-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.restaurant {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.restaurant img {
+    width: 100%;
+    border-radius: 5px;
+}
+button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 250px;
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h4>HOME</h4>
+        <h1>DINE DASH</h1>
+        <input type="text" id="search" placeholder="Search for restaurants...">
+    </header>
+    <main id="restaurant-list">
+        <!-- Restaurants will be populated here -->
+    </main>
+    <div onclick="ORDERNOW">
+        
+        <center><a href="menu.html">ORDER NOW</a></center>
+        
+
+    </div>
+    
+    
+    <script>
+        const restaurants = [
+    { name: "Pizza Place", image: "piza.jpg", cuisine: "Italian",getSelection:'' },
+    { name: "Sushi House", image: "susi.jpg", cuisine: "Japanese" },
+    { name: "Burger Joint", image: "burger.jpg", cuisine: "American", },
+    { name: "Curry Corner", image: "curry.jpg", cuisine: "Indian" },
+    { name: "Taco Town", image: "tacko.jpg", cuisine: "Mexican" },
+    { name: "masala dosa", image: "dosa.jpg", cuisine: "Mexican" },
+    { name: "noodles", image: "noodles.jpg", cuisine: "indian" },
+    { name: "palak paneer", image: "palak.jpg", cuisine: "indian" }
+
+
+
+    
+];
+
+
+
+
+
+
+
+function displayRestaurants(filteredRestaurants) {
+    const restaurantList = document.getElementById('restaurant-list');
+    restaurantList.innerHTML = ''; // Clear previous results
+    
+
+    filteredRestaurants.forEach(restaurant => {
+        const div = document.createElement('div');
+        div.className = 'restaurant';
+        div.innerHTML = `
+            <img src="${restaurant.image}" alt="${restaurant.name}">
+            <h3>${restaurant.name}</h3>
+            <p>${restaurant.cuisine}</p>
+        `;
+        restaurantList.appendChild(div);
+    });
+}
+
+// Initial display
+displayRestaurants(restaurants);
+
+// Search functionality
+document.getElementById('search').addEventListener('input', function() {
+    const query = this.value.toLowerCase();
+    const filtered = restaurants.filter(restaurant =>
+        restaurant.name.toLowerCase().includes(query)
+    );
+    displayRestaurants(filtered);
+});
+
+    </script>
+</body>
+ </html>
